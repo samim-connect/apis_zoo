@@ -1,0 +1,4 @@
+{{ object.title }}
+{{ object.category.title }}
+{{ object.location.latitute }}
+{{ object.location.longitute }}
