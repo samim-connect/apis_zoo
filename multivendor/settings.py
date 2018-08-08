@@ -12,6 +12,25 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import redis
+from dotenv import load_dotenv
+
+
+# Getting all the environment vaiables for deployment.
+ROOT_PATH = os.path.abspath('')
+ENV = os.path.join(ROOT_PATH,  '.env')
+load_dotenv(ENV)
+
+# Required params
+HOSTNAME = os.environ.get('HOST')
+PORT = os.environ.get('PORT')
+
+DB_HOSTNAME = os.environ.get('DB_HOST')
+DB_PORT = os.environ.get('DB_PORT')
+DB_USERNAME = os.environ.get('DB_USERNAME')
+DB_PASSWORD = os.environ.get('DB_PASSWORD')
+
+MEDIA_URL = os.environ.get('MEDIA_URL')
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
