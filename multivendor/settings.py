@@ -12,10 +12,15 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import redis
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Production .env
+dotenv_path = os.path.join(BASE_DIR, '.env')
+load_dotenv = load_dotenv(dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -24,13 +29,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(p3y-b^5a+=moy@5z=ngoo^q7d6u@$r+j%tyujrljox@)y717g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = eval(os.environ.get('RUN_LOCAL'))
 
-ALLOWED_HOSTS = []
+# List of hosts
+ALLOWED_HOSTS = [os.environ.get('HOST')]
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -99,10 +104,10 @@ WSGI_APPLICATION = 'multivendor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'multivendor',
-        'USER': 'vendoradmin',
-        'PASSWORD': 'vendoradmin',
-        'HOST': 'localhost',
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USERNAME'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
         'PORT': '',
     }
 }
@@ -144,8 +149,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-MEDIA_ROOT = '/home/samim_007/workspace/web/multivendor/front_end/assets/'
+
+MEDIA_ROOT = os.environ.get('MEDIA_URL')
 MEDIA_URL = '/media/'
 
 

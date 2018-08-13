@@ -115,7 +115,7 @@ class ProductImageAPI(APIView):
     parser_classes = (MultiPartParser, FormParser, )
 
     def post(self, request, format=None):
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         file_obj = request.FILES.get('image')
         filename = 'media/' + str(uuid.uuid4()) + '.png'
         path = default_storage.save(filename, ContentFile(file_obj.read()))

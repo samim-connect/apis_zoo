@@ -114,7 +114,7 @@ class ProductClass:
         self.query = request.query_params
 
     def get(self):
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         # Needed to be extended later
         try:
             if self.query.get('id'):
