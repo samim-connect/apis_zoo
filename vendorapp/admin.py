@@ -12,3 +12,7 @@ admin.site.register(Cart)
 admin.site.register(Carosal)
 admin.site.register(Service)
 admin.site.register(ServiceCategory)
+
+admin.site.site_title = 'Zoobaay'
+admin.site.site_header = 'Welcome to Zoobaay administration'
+
