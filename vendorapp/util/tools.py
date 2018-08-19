@@ -2,7 +2,6 @@ from PIL import Image, ImageChops
 
 
 def resize_image(input_file_path, output_file_path, size=(200, 200)):
-    import pdb; pdb.set_trace()
     # Keeping aspect ratio intact the missing areas
     # are compensated by white color.
 
