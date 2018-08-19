@@ -48,6 +48,7 @@ from multivendor.settings import (
     MEDIA_ROOT,
     MEDIA_URL
 )
+from ..util import tools
 
 
 class CategoryAPI(APIView):
@@ -115,6 +116,7 @@ class ProductImageAPI(APIView):
     parser_classes = (MultiPartParser, FormParser, )
 
     def post(self, request, format=None):
+        import pdb; pdb.set_trace()
         # import pdb; pdb.set_trace()
         file_obj = request.FILES.get('image')
         filename = 'media/' + str(uuid.uuid4()) + '.png'
@@ -124,11 +126,16 @@ class ProductImageAPI(APIView):
             product_instance = Product.objects.get(id=item_id)
             product_instance.image_url = path
             product_instance.save()
-            # image_path = IMAGE_URL + path (image resizer should be added later)
+            self.clean_image(filename)
         except:
             return {'detail': 'No data found'}
-        # do some stuff with uploaded file
+
         return Response(status=200)
+
+    @staticmethod
+    def clean_image(filename):
+        full_image_path = MEDIA_ROOT + '/' + filename
+        tools.resize_image(full_image_path, full_image_path)
 
 
 class LocationAPI(APIView):
